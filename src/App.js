@@ -38,7 +38,7 @@ function App() {
                     <Typography style={{ flex: 1 }} variant="h4">
                         {currentPage === "MainPage" && "Leaders"}
                         {currentPage === "Reviews" && "Reviews Text"}
-                        {currentPage === "FeedbackForm" && "Feedback Text"}
+                        {currentPage === "FeedbackForm" && "Show your Appreciation"}
                     </Typography>
 
                     <Button style={{ flexShrink: 1 }} variant="contained" color="primary" onClick={() => {setCurrentPage('FeedbackForm')}}>
@@ -55,7 +55,6 @@ function App() {
                 </>
                 }
 
-                More
                 {currentPage === "Reviews" && <Reviews />}
                 {currentPage === "FeedbackForm" && <FeedbackForm />}
             </Container>
