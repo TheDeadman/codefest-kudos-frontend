@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,15 +15,9 @@ const useStyles = makeStyles({
 });
 
 
-const rows = [
-    {name:'Paul Pennel', points:50},
-    {name:'Alex Lindemann', points:50},
-    {name:'Shushmita Maganty', points:49},
-    {name:'Katie Zemon', points:47},
-    {name:'Kyle Thompson', points:47},
-];
 
-export default function BasicTable() {
+
+export default function BasicTable({rows}) {
     const classes = useStyles();
 
     return (
