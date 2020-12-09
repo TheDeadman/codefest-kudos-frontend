@@ -13,7 +13,7 @@ import './App.css';
 function App() {
     const [isLoading, setIsLoading] = useState(true);
     const [rowData, setRowData] = useState([]);
-    const [currentPage, setCurrentPage] = useState('MainPage')
+    const [currentPage, setCurrentPage] = useState('MainPage');
 
     useEffect(() => {
         console.log("Fetching Data");
@@ -36,10 +36,12 @@ function App() {
             <Container maxWidth="md">
                 <div style={{ display: 'flex', marginTop: 30 }}>
                     <Typography style={{ flex: 1 }} variant="h4">
-                        Leaders
+                        {currentPage === "MainPage" && "Leaders"}
+                        {currentPage === "Reviews" && "Reviews Text"}
+                        {currentPage === "FeedbackForm" && "Feedback Text"}
                     </Typography>
 
-                    <Button style={{ flexShrink: 1 }} variant="contained" color="primary">
+                    <Button style={{ flexShrink: 1 }} variant="contained" color="primary" onClick={() => {setCurrentPage('FeedbackForm')}}>
                         Create Review
                     </Button>
                 </div>
@@ -48,14 +50,14 @@ function App() {
                 </div>}
 
 
-                {!isLoading && <>
+                {!isLoading && currentPage === "MainPage" && <>
                     <BasicTable rows={rowData} />
                 </>
                 }
 
                 More
-                <Reviews />
-                <FeedbackForm />
+                {currentPage === "Reviews" && <Reviews />}
+                {currentPage === "FeedbackForm" && <FeedbackForm />}
             </Container>
 
         </div>
