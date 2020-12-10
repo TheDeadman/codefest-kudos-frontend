@@ -71,6 +71,7 @@ function App() {
 
             <Container maxWidth="lg">
                 <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: 30 }}>
+                    <h2>Welcome Back Jack Frost!</h2>
                     <Typography style={{ flex: 1 }} variant="h4">
                         {currentPage === "MainPage" && ""}
                         {currentPage === "Reviews" && "My Recognition"}
