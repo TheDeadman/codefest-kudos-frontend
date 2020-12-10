@@ -8,10 +8,12 @@ import axios from 'axios';
 
 import AppBar from './AppBar'
 import BasicTable from './components/MainPageTable';
+import CustomPaginationActionsTable from './components/PaginationTable';
 import Reviews from './components/Reviews';
-import FeedbackForm from './components/FeedbackForm';
+import HonorAssociateForm from './components/HonorAssociateForm';
 import './App.css';
-import FeedbackFormDialog from "./components/FeedbackForm";
+import HonorAssociateFormDialog from "./components/HonorAssociateForm";
+import MainPageScoreTables from "./components/MainPageScoreTables"
 
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -28,6 +30,7 @@ const currentUserId = getParameterByName("userId") || "P123456";
 
 
 function App() {
+
     const [isLoading, setIsLoading] = useState(true);
     const [rowData, setRowData] = useState([]);
     const [userData, setUserData] = useState({kudos:[]});
@@ -48,39 +51,40 @@ function App() {
         <div className="App">
             <AppBar />
 
-            <Container  maxWidth="md">
+            <Container maxWidth="lg">
                 <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: 30 }}>
                     <Typography style={{ flex: 1 }} variant="h4">
-                        {currentPage === "MainPage" && "Leaderboard"}
-                        {currentPage === "Reviews" && "Feedback Received"}
+                        {currentPage === "MainPage" && ""}
+                        {currentPage === "Reviews" && "My Recognition"}
                     </Typography>
-                    
-                    {currentPage !== "Reviews" && <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('Reviews')}}>
-                        Feedback I Received
-                    </Button></div>}
-                    {currentPage === "Reviews" && <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('MainPage')}}>
-                        Back
-                    </Button></div>}
-                    &nbsp;&nbsp;
-                    <FeedbackFormDialog rowData={rowData} setRowData={setRowData} currentUser={userData}/>
 
+                    <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('MainPage')}}>
+                        Home
+                    </Button></div>&nbsp;&nbsp;
+
+                    <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('Reviews')}}>
+                        My Recognition
+                    </Button></div>&nbsp;&nbsp;
+
+                    <HonorAssociateFormDialog rowData={rowData} setRowData={setRowData} currentUser={userData}/>
                 </div>
-                {isLoading && <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <CircularProgress />
-                </div>}
+            
 
+                    {/*{isLoading && <div style={{ display: 'flex', justifyContent: 'center' }}>*/}
+                    {/*    <CircularProgress />*/}
+                    {/*</div>}*/}
+                    {/*{!isLoading &&  <>*/}
 
-                {!isLoading && currentPage === "MainPage" && <>
-                    <br />
-                    <BasicTable rows={rowData} />
-                </>
-                }
+                    {/*</>*/}
+                    {/*}*/}
 
-                {currentPage === "Reviews" && <Reviews feedbackData={userData.kudos} />}
-                {currentPage === "FeedbackForm" && <FeedbackForm />}
+                    {currentPage === "Reviews" && <Reviews feedbackData={userData.kudos} />}
+                    {currentPage === "MainPage" && <MainPageScoreTables allScores={rowData} />}
             </Container>
 
+
         </div>
+
     );
 }
 

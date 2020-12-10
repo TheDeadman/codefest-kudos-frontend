@@ -24,14 +24,6 @@ const useStyles = makeStyles({
   },
 });
 
-
-
-const feedbackData = [
-  { name: 'Steve Smith', feedback: 'Thanks for your tech blog submission!'},
-  { name: 'John Doe', feedback: 'Appreciate your leadership in steering the team in the right direction.'},
-  { name: 'Will Page', feedback: 'Really grateful for all your help in getting me setup!'}
-];
-
 export default function SimpleCard({feedbackData}) {
   const classes = useStyles();
   return (

@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
-export default function FeedbackFormDialog({rowData, setRowData, currentUser}) {
+export default function HonorAssociateFormDialog({rowData, setRowData, currentUser}) {
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState({associateId: "", comment: ""});
 
@@ -32,10 +32,10 @@ export default function FeedbackFormDialog({rowData, setRowData, currentUser}) {
     return (
         <div>
             <Button variant="contained" color="primary" onClick={handleClickOpen}>
-                Create Review
+                Honor an Associate
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Create Review</DialogTitle>
+                <DialogTitle id="form-dialog-title">Honor Associate</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Use this form to acknowledge a fellow associate for going above and beyond and exceeding your expectations.

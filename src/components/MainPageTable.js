@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
     table: {
-        // minWidth: 650,
+        minWidth: 200,
     },
 });
 
@@ -25,8 +25,8 @@ export default function BasicTable({rows}) {
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Points</TableCell>
+                        <TableCell><b>Name</b></TableCell>
+                        <TableCell align="right"><b>Honor Points</b></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
