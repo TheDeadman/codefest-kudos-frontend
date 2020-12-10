@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles({
   root: {
@@ -31,10 +32,8 @@ const feedbackData = [
   { name: 'Will Page', feedback: 'Really grateful for all your help in getting me setup!'}
 ];
 
-export default function SimpleCard() {
+export default function SimpleCard({feedbackData}) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
-
   return (
     <>
       {feedbackData.map((feedback) => (
@@ -42,10 +41,10 @@ export default function SimpleCard() {
           <Card className={classes.root} >
             <CardContent>
               <Typography variant="body2" component="p">
-                {feedback.feedback}
+                {feedback.comment}
               </Typography>
               <Typography variant="body2" align="right">
-                - {feedback.name}
+                - {feedback.commenter}
               </Typography>
             </CardContent>
           </Card>

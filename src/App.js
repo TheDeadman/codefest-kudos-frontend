@@ -13,10 +13,24 @@ import FeedbackForm from './components/FeedbackForm';
 import './App.css';
 import FeedbackFormDialog from "./components/FeedbackForm";
 
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+// Hardcoding the current user
+const currentUserId = getParameterByName("userId") || "P123456";
+
+
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
     const [rowData, setRowData] = useState([]);
+    const [userData, setUserData] = useState({kudos:[]});
     const [currentPage, setCurrentPage] = useState('MainPage');
 
     useEffect(() => {
@@ -25,18 +39,20 @@ function App() {
             setRowData(res.data.sort((a,b) => b.points - a.points));
             setIsLoading(false);
         });
+        axios.get(`http://23.100.225.116:3040/associates/${currentUserId}`).then(res => {
+            setUserData(res.data)
+        })
     }, []);
 
     return (
         <div className="App">
             <AppBar />
 
-            <Container maxWidth="md">
-                <div style={{ display: 'flex', marginTop: 30 }}>
+            <Container  maxWidth="md">
+                <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: 30 }}>
                     <Typography style={{ flex: 1 }} variant="h4">
-                        {currentPage === "MainPage" && "Leaders"}
+                        {currentPage === "MainPage" && "Leaderboard"}
                         {currentPage === "Reviews" && "Feedback Received"}
-                        {currentPage === "FeedbackForm" && "Show your Appreciation"}
                     </Typography>
                     
                     {currentPage !== "Reviews" && <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('Reviews')}}>
@@ -46,7 +62,7 @@ function App() {
                         Back
                     </Button></div>}
                     &nbsp;&nbsp;
-                    <FeedbackFormDialog/>
+                    <FeedbackFormDialog rowData={rowData} setRowData={setRowData} currentUser={userData}/>
 
                 </div>
                 {isLoading && <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -55,11 +71,12 @@ function App() {
 
 
                 {!isLoading && currentPage === "MainPage" && <>
+                    <br />
                     <BasicTable rows={rowData} />
                 </>
                 }
 
-                {currentPage === "Reviews" && <Reviews />}
+                {currentPage === "Reviews" && <Reviews feedbackData={userData.kudos} />}
                 {currentPage === "FeedbackForm" && <FeedbackForm />}
             </Container>
 

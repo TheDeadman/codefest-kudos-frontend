@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,9 +6,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import axios from 'axios';
 
-export default function FeedbackFormDialog() {
+export default function FeedbackFormDialog({rowData, setRowData, currentUser}) {
     const [open, setOpen] = React.useState(false);
+    const [formData, setFormData] = useState({associateId: "", comment: ""});
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -17,6 +19,15 @@ export default function FeedbackFormDialog() {
     const handleClose = () => {
         setOpen(false);
     };
+    
+    const sendFeedback = () => {
+        let currentFeedbackData = rowData.filter(row => row.id === formData.associateId)[0];
+        
+        axios.patch(`http://23.100.225.116:3040/associates/${formData.associateId}`, {points: currentFeedbackData.points + 1, kudos: [...currentFeedbackData.kudos, {comment: formData.comment, commenter: currentUser.name}]}).then(res => {
+            setRowData([...rowData.filter(row => row.id !== formData.associateId), res.data].sort((a,b) => b.points - a.points));
+            handleClose();
+        })
+    }
 
     return (
         <div>
@@ -37,6 +48,7 @@ export default function FeedbackFormDialog() {
                         type="email"
                         variant="outlined"
                         fullWidth
+                        onChange={(event) => setFormData({...formData, associateId: event.target.value.toUpperCase()})}
                     />
                     <TextField
                         id="associateThankYouMessage"
@@ -45,13 +57,14 @@ export default function FeedbackFormDialog() {
                         rows={6}
                         variant="outlined"
                         fullWidth
+                        onChange={(event) => setFormData({...formData, comment: event.target.value})}
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button variant="contained" onClick={handleClose} color="primary">
+                    <Button variant="contained" onClick={sendFeedback} color="primary">
                         Send
                     </Button>
                 </DialogActions>
