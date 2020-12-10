@@ -1,8 +1,12 @@
 .App {
   /*text-align: center;*/
   /*display:flex;*/
-
+  
 }
+.MuiButton-containedPrimary {
+  color: white;
+}
+
 .break {
   flex-basis: 100%;
   height: 0;

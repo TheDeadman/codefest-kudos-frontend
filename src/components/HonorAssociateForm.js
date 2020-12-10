@@ -61,7 +61,7 @@ export default function HonorAssociateFormDialog({rowData, setRowData, currentUs
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">
+                    <Button style={{color: 'black'}} onClick={handleClose} color="primary">
                         Cancel
                     </Button>
                     <Button variant="contained" onClick={sendFeedback} color="primary">

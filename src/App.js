@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { yellow, grey } from '@material-ui/core/colors';
+
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -28,6 +33,18 @@ function getParameterByName(name, url = window.location.href) {
 const currentUserId = getParameterByName("userId") || "P123456";
 
 
+const theme = createMuiTheme({
+    palette: {
+      primary: {
+        // Purple and green play nicely together.
+        main: grey[600],
+      },
+      secondary: {
+        // This is green.A700 as hex.
+        main: yellow[600],
+      },
+    },
+  });
 
 function App() {
 
@@ -48,6 +65,7 @@ function App() {
     }, []);
 
     return (
+        <ThemeProvider theme={theme}>
         <div className="App">
             <AppBar />
 
@@ -84,7 +102,7 @@ function App() {
 
 
         </div>
-
+        </ThemeProvider>
     );
 }
 
