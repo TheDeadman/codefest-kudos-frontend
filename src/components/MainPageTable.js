@@ -31,7 +31,7 @@ export default function BasicTable({rows}) {
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
-                        <TableRow key={row.name}>
+                        <TableRow key={row.id}>
                             <TableCell component="th" scope="row">
                                 {row.name}
                             </TableCell>
