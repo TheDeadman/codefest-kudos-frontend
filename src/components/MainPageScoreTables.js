@@ -41,9 +41,9 @@ export default function MainPageScoreTables({allScores}) {
                 { name: 'Salvatore Lenard', points: 25 },
             ]);
             setAllTimeHighScores([
-                { name: 'Sammy Pitre', points: 250 },
-                { name: 'Marylyn Stankiewicz', points: 140 },
-                { name: 'Nathalie Hanberry', points: 120 },
+                { name: 'Santa Claus', points: 568 },
+                { name: 'Buddy Elf', points: 202 },
+                { name: 'Rudolf Reindeer', points: 178 },
                 { name: 'Nelda Bland', points: 114 },
                 { name: 'Nakia Keener', points: 113 },
                 { name: 'Suellen Ling', points: 102 },
