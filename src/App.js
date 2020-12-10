@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AppBar from './AppBar'
@@ -8,6 +7,7 @@ import BasicTable from './components/MainPageTable';
 import Reviews from './components/Reviews';
 import FeedbackForm from './components/FeedbackForm';
 import './App.css';
+import FeedbackFormDialog from "./components/FeedbackForm";
 
 
 function App() {
@@ -38,12 +38,11 @@ function App() {
                     <Typography style={{ flex: 1 }} variant="h4">
                         {currentPage === "MainPage" && "Leaders"}
                         {currentPage === "Reviews" && "Reviews Text"}
-                        {currentPage === "FeedbackForm" && "Feedback Text"}
+                        {currentPage === "FeedbackForm" && "Show your Appreciation"}
                     </Typography>
 
-                    <Button style={{ flexShrink: 1 }} variant="contained" color="primary" onClick={() => {setCurrentPage('FeedbackForm')}}>
-                        Create Review
-                    </Button>
+                    <FeedbackFormDialog/>
+
                 </div>
                 {isLoading && <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <CircularProgress />
@@ -55,7 +54,6 @@ function App() {
                 </>
                 }
 
-                More
                 {currentPage === "Reviews" && <Reviews />}
                 {currentPage === "FeedbackForm" && <FeedbackForm />}
             </Container>
