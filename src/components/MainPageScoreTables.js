@@ -69,7 +69,7 @@ export default function MainPageScoreTables({allScores}) {
                              alt = "Picture of a trophy" />
                     </Grid>
                     <Grid item xs={4}>
-                        <h2>Elite: Top Ten Scores This Trimester </h2>
+                        <h2>The Elite: Top Ten Scores This Trimester </h2>
                     </Grid>
                     <Grid item xs={2}>
                     </Grid>
