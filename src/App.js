@@ -55,11 +55,11 @@ function App() {
 
     useEffect(() => {
         console.log("Fetching Data");
-        axios.get('http://23.100.225.116:3040/associates').then(res => {
+        axios.get('http://codefest-api-gateway.azure-api.net/associates/associates').then(res => {
             setRowData(res.data.sort((a,b) => b.points - a.points));
             setIsLoading(false);
         });
-        axios.get(`http://23.100.225.116:3040/associates/${currentUserId}`).then(res => {
+        axios.get(`http://codefest-api-gateway.azure-api.net/associates/associates/${currentUserId}`).then(res => {
             setUserData(res.data)
         })
     }, []);
