@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AppBar from './AppBar'
@@ -37,10 +38,12 @@ function App() {
                 <div style={{ display: 'flex', marginTop: 30 }}>
                     <Typography style={{ flex: 1 }} variant="h4">
                         {currentPage === "MainPage" && "Leaders"}
-                        {currentPage === "Reviews" && "Reviews Text"}
+                        {currentPage === "Reviews" && "Feedback Received"}
                         {currentPage === "FeedbackForm" && "Show your Appreciation"}
                     </Typography>
-
+                    <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('Reviews')}}>
+                        Feedback I Received
+                    </Button></div>&nbsp;&nbsp;
                     <FeedbackFormDialog/>
 
                 </div>

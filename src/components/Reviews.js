@@ -23,31 +23,36 @@ const useStyles = makeStyles({
   },
 });
 
+
+
+const feedbackData = [
+  { name: 'Steve Smith', feedback: 'Thanks for your tech blog submission!'},
+  { name: 'John Doe', feedback: 'Appreciate your leadership in steering the team in the right direction.'},
+  { name: 'Will Page', feedback: 'Really grateful for all your help in getting me setup!'}
+];
+
 export default function SimpleCard() {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          adjective
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-  );
+    <>
+      {feedbackData.map((feedback) => (
+        <p>
+          <Card className={classes.root} >
+            <CardContent>
+              <Typography variant="body2" component="p">
+                {feedback.feedback}
+              </Typography>
+              <Typography variant="body2" align="right">
+                - {feedback.name}
+              </Typography>
+            </CardContent>
+          </Card>
+        </p>
+      ))}
+    </>
+  )
 }
+
+
