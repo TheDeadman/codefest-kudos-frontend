@@ -3,6 +3,9 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+import axios from 'axios';
+
 import AppBar from './AppBar'
 import BasicTable from './components/MainPageTable';
 import Reviews from './components/Reviews';
@@ -18,16 +21,10 @@ function App() {
 
     useEffect(() => {
         console.log("Fetching Data");
-        setTimeout(() => {
-            setRowData([
-                { name: 'Paul Pennel', points: 50 },
-                { name: 'Alex Lindemann', points: 50 },
-                { name: 'Sushmita Maganty', points: 49 },
-                { name: 'Katie Zemon', points: 47 },
-                { name: 'Kyle Thompson', points: 47 },
-            ]);
+        axios.get('http://23.100.225.116:3040/associates').then(res => {
+            setRowData(res.data.sort((a,b) => b.points - a.points));
             setIsLoading(false);
-        }, 500);
+        });
     }, []);
 
     return (
@@ -41,9 +38,14 @@ function App() {
                         {currentPage === "Reviews" && "Feedback Received"}
                         {currentPage === "FeedbackForm" && "Show your Appreciation"}
                     </Typography>
-                    <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('Reviews')}}>
+                    
+                    {currentPage !== "Reviews" && <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('Reviews')}}>
                         Feedback I Received
-                    </Button></div>&nbsp;&nbsp;
+                    </Button></div>}
+                    {currentPage === "Reviews" && <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('MainPage')}}>
+                        Back
+                    </Button></div>}
+                    &nbsp;&nbsp;
                     <FeedbackFormDialog/>
 
                 </div>
