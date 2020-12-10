@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -23,6 +23,8 @@ const useStyles = makeStyles({
   },
 });
 
+
+
 const feedbackData = [
   { name: 'Steve Smith', feedback: 'Thanks for your tech blog submission!'},
   { name: 'John Doe', feedback: 'Appreciate your leadership in steering the team in the right direction.'},
@@ -34,7 +36,7 @@ export default function SimpleCard() {
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Fragment>
+    <>
       {feedbackData.map((feedback) => (
         <p>
           <Card className={classes.root} >
@@ -49,7 +51,7 @@ export default function SimpleCard() {
           </Card>
         </p>
       ))}
-    </Fragment>
+    </>
   )
 }
 
