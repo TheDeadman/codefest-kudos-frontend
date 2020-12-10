@@ -7,7 +7,7 @@ import BasicTable from './components/MainPageTable';
 import Reviews from './components/Reviews';
 import FeedbackForm from './components/FeedbackForm';
 import './App.css';
-import FormDialog from "./components/FeedbackForm";
+import FeedbackFormDialog from "./components/FeedbackForm";
 
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
                         {currentPage === "FeedbackForm" && "Show your Appreciation"}
                     </Typography>
 
-                    <FormDialog/>
+                    <FeedbackFormDialog/>
 
                 </div>
                 {isLoading && <div style={{ display: 'flex', justifyContent: 'center' }}>
