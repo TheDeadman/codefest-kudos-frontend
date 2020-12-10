@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: codefestkudosfrontend 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codefestkudosfrontend
+  template:
+    metadata:
+      labels:
+        app: codefestkudosfrontend 
+    spec:
+      containers:
+        - name: codefestkudosfrontend 
+          image: devopsheroes.azurecr.io/codefestkudosfrontend
+          ports:
+          - containerPort: 3000
