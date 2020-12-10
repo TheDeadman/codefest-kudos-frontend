@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kudos
-        image: thedeadman/cfest:kudos-app-1.0.1
+        image: thedeadman/cfest:kudos-app-1.0.3
         ports:
         - containerPort: 3000
 ---

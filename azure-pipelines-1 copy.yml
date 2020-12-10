@@ -44,13 +44,13 @@ stages:
     - upload: manifests
       artifact: manifests
 
-- stage: DeployCanary
-  displayName: Deploy Canary
+- stage: Deploy
+  displayName: Deploy stage
   dependsOn: Build
 
   jobs:
-  - deployment: Deploycanary
-    displayName: Deploy canary
+  - deployment: Deploy
+    displayName: Deploy
     pool:
       vmImage: $(vmImageName)
     environment: 'TheDeadmancodefestkudosfrontend.default'
@@ -69,8 +69,6 @@ stages:
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
-              strategy: canary
-              percentage: 25
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
