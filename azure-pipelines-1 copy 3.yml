@@ -70,7 +70,8 @@ stages:
             inputs:
               action: deploy
               strategy: canary
-              percentage: 50
+              percentage: 25
+              increment: 25
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
@@ -78,49 +79,3 @@ stages:
                 $(imagePullSecret)
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
-
-- stage: PromoteRejectCanary
-  displayName: Promote or Reject canary
-  dependsOn: DeployCanary
-  condition: succeeded()
-
-  jobs:
-  - deployment: PromoteCanary
-    displayName: Promote Canary
-    pool: 
-      vmImage: Ubuntu-16.04
-    environment: 'codefest-promote.default'
-    strategy:
-      runOnce:
-        deploy:
-          steps:            
-          - task: KubernetesManifest@0
-            displayName: promote canary
-            inputs:
-              action: 'promote'
-              strategy: 'canary'
-              manifests: '$(Pipeline.Workspace)/manifests/*'
-              containers: '$(containerRegistry)/$(imageRepository):$(tag)'
-              imagePullSecrets: '$(imagePullSecret)'
-
-- stage: RejectCanary
-  displayName: Reject canary
-  dependsOn: PromoteRejectCanary
-  condition: failed()
-
-  jobs:
-  - deployment: RejectCanary
-    displayName: Reject Canary
-    pool: 
-      vmImage: Ubuntu-16.04
-    environment: 'codefest-promote.default'
-    strategy:
-      runOnce:
-        deploy:
-          steps:            
-          - task: KubernetesManifest@0
-            displayName: reject canary
-            inputs:
-              action: 'reject'
-              strategy: 'canary'
-              manifests: '$(Pipeline.Workspace)/manifests/*'
