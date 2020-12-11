@@ -65,8 +65,7 @@ export default function MainPageScoreTables({allScores}) {
 
                     {/*Row */}
                     <Grid item xs={1}>
-                        <img src = "images/trophy1.png"
-                             alt = "Picture of a trophy" />
+                        <img src = "images/trophy1.png" alt = "Picture of a trophy" />
                     </Grid>
                     <Grid item xs={4}>
                         <h2>The Elite: Top Ten Scores This Trimester </h2>
@@ -74,8 +73,7 @@ export default function MainPageScoreTables({allScores}) {
                     <Grid item xs={2}>
                     </Grid>
                     <Grid item xs={1}>
-                        <img src = "images/trophy2.png"
-                             alt = "Picture of a trophy" />
+                        <img src = "images/trophy2.png" alt = "Picture of a trophy" />
                     </Grid>
                     <Grid item xs={4}>
                         <h2>All Stars:  Top Ten All Time High Scores</h2>

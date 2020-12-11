@@ -70,7 +70,7 @@ stages:
             inputs:
               action: deploy
               strategy: canary
-              percentage: 25
+              percentage: 50
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml

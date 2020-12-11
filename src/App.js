@@ -8,6 +8,8 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
 
 import axios from 'axios';
 
@@ -18,7 +20,9 @@ import Reviews from './components/Reviews';
 import HonorAssociateForm from './components/HonorAssociateForm';
 import './App.css';
 import HonorAssociateFormDialog from "./components/HonorAssociateForm";
-import MainPageScoreTables from "./components/MainPageScoreTables"
+import MainPageScoreTables from "./components/MainPageScoreTables";
+
+import dawg from './images/dawg.gif';
 
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -49,6 +53,7 @@ const theme = createMuiTheme({
 function App() {
 
     const [isLoading, setIsLoading] = useState(true);
+    const [memeOpen, setMemeOpen] = useState(false);
     const [rowData, setRowData] = useState([]);
     const [userData, setUserData] = useState({kudos:[]});
     const [currentPage, setCurrentPage] = useState('MainPage');
@@ -76,6 +81,17 @@ function App() {
                         {currentPage === "MainPage" && ""}
                         {currentPage === "Reviews" && "My Recognition"}
                     </Typography>
+
+
+                    <div><Button variant="contained" color="primary" onClick={() => {setMemeOpen(true)}}>
+                        Me when we get Canary Deployments
+                    </Button></div>&nbsp;&nbsp;
+
+                    <Dialog open={memeOpen} onClose={() => setMemeOpen(false)}>
+                        <DialogContent>
+                            <img style={{height: 460}} src={dawg} />
+                        </DialogContent>
+                    </Dialog>
 
                     <div><Button variant="contained" color="primary" onClick={() => {setCurrentPage('MainPage')}}>
                         Home
